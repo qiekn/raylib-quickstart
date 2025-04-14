@@ -13,5 +13,5 @@ cmake -B build && make -j$(nproc) -C build
 
 ```bash
 cd path/to/your/project
-ls -s build/compile_commands.json ./compile_commands.json
+ln -s build/compile_commands.json ./compile_commands.json
 ```
