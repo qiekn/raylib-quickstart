@@ -1,9 +1,6 @@
-# Quick start
-
-## macOS Users
+# Quickstart
 
 ```bash
-brew install raylib
 git clone https://github.com/qiekn/raylib-quickstart.git
 cmake -B build && make -j$(nproc) -C build
 ./build/game
