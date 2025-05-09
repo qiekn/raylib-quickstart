@@ -31,7 +31,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# header files
+# headers
 include_directories(include)
 file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/include/*.h"
@@ -45,10 +45,10 @@ file(GLOB_RECURSE SRCS CONFIGURE_DEPENDS
 # targets
 add_executable(${PROJECT_NAME} ${SRCS})
 
-add_compile_definitions(SNAKE_RESOURCES="${CMAKE_CURRENT_LIST_DIR}/resources")
-
 # libraries
-target_link_libraries(${PROJECT_NAME} raylib)
+target_link_libraries(${PROJECT_NAME}
+    raylib
+)
 
 # checks if OSX and links appropriate frameworks (only required on macOS)
 if (APPLE)
