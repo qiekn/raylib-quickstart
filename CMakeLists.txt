@@ -28,16 +28,9 @@ endif()
 
 # generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 set(CMAKE_CXX_STANDARD 20)
 
-# headers
-include_directories(include)
-file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS
-    "${CMAKE_SOURCE_DIR}/include/*.h"
-)
-
-# sources
+# source files
 file(GLOB_RECURSE SRCS CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
@@ -45,11 +38,19 @@ file(GLOB_RECURSE SRCS CONFIGURE_DEPENDS
 # targets
 add_executable(${PROJECT_NAME} ${SRCS})
 
+# header files
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/include/*.h"
+)
+
 # libraries
 target_link_libraries(${PROJECT_NAME}
     raylib
 )
-
 # checks if OSX and links appropriate frameworks (only required on macOS)
 if (APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework IOKit")
