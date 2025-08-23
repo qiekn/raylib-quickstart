@@ -1,1 +1,13 @@
-make clean -C build && make -j$(nproc) -C build && ./build/game
+#!/bin/bash
+
+# build directory
+WEB_DIR="web"
+BUILD_DIR="build"
+
+if [ "$1" = "web" ]; then
+  make clean -C "$WEB_DIR" && make -j$(nproc) -C "$WEB_DIR" && emrun ./"$WEB_DIR"/out/game.html
+else
+  make clean -C "$BUILD_DIR" && make -j$(nproc) -C "$BUILD_DIR" && ./"$BUILD_DIR"/game
+fi
+
+# vim: ft=sh ts=2 sw=2 et
