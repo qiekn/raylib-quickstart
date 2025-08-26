@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "constants.h"
 
 #if defined(PLATFORM_WEB)
 #include <emscripten/emscripten.h>
@@ -16,7 +17,7 @@ int main() {
 
   InitWindow(kScreenWidth, kSreenHeight, "game");
 
-  SetTargetFPS(60);
+  SetTargetFPS(kFPS);
 
 #if defined(PLATFORM_WEB)
   emscripten_set_main_loop(Loop, 0, 1);
