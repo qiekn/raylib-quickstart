@@ -1,13 +1,19 @@
 #include <raylib.h>
 #include "constants.h"
+#include "managers/scene-manager.h"
 
 #if defined(PLATFORM_WEB)
 #include <emscripten/emscripten.h>
 #endif
 
+// Constants Here
 const int kScreenWidth = 800;
 const int kSreenHeight = 450;
 
+// Global Variables
+SceneManager scene_manager;
+
+// Function Declarations
 void Loop();
 void Update();
 void Draw();
@@ -37,16 +43,10 @@ void Loop() {
   Draw();
 }
 
-void Update() {
-  // TODO
-}
+void Update() { scene_manager.Update(); }
 
 void Draw() {
   BeginDrawing();
-
-  ClearBackground(RAYWHITE);
-
-  DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
+  scene_manager.Draw();
   EndDrawing();
 }
