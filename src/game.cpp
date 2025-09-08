@@ -12,7 +12,7 @@
 void Game::Run() {
   Init();
 
-  InitWindow(kScreenWidth, kSreenHeight, "game");
+  InitWindow(kScreenWidth, kScreenHeight, "game");
 
   Start();
 
