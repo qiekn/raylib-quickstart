@@ -12,7 +12,7 @@ SceneManager::SceneManager() {
   scenes_.emplace(SceneId::kLogo, std::make_unique<LogoScene>());
   scenes_.emplace(SceneId::kHome, std::make_unique<HomeScene>());
   scenes_.emplace(SceneId::kGame, std::make_unique<GameScene>());
-  scenes_.emplace(SceneId::KEnd, std::make_unique<EndScene>());
+  scenes_.emplace(SceneId::kEnd, std::make_unique<EndScene>());
 }
 
 SceneManager::~SceneManager() {}
@@ -33,7 +33,7 @@ void SceneManager::Update() {
       break;
     case SceneId::kGame:
       break;
-    case SceneId::KEnd:
+    case SceneId::kEnd:
       break;
     default:
       break;
