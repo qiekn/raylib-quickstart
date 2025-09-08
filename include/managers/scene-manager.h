@@ -16,6 +16,9 @@ public:
   void ChangeScene(int index);
 
 private:
+  void HandleHandSwitch();  // Cycle through some scenes (press Tab)
+  void HandleAutoSwitch();
+
   SceneId current_scene_id_{SceneId::kGame};
   size_t frame_counter_{0};
   std::unordered_map<SceneId, std::unique_ptr<Scene>> scenes_;

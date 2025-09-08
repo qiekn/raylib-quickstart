@@ -18,6 +18,33 @@ SceneManager::SceneManager() {
 SceneManager::~SceneManager() {}
 
 void SceneManager::Update() {
+  HandleHandSwitch();
+  HandleAutoSwitch();
+
+  // Update scene base on current scene id
+  auto it = scenes_.find(current_scene_id_);
+  if (it != scenes_.end() && it->second) {
+    it->second->Update();
+  }
+}
+
+void SceneManager::HandleHandSwitch() {
+  static std::vector<SceneId> scenes = {SceneId::kGame, SceneId::kEnd};
+  if (IsKeyPressed(KEY_TAB)) {
+    // 找到当前场景在列表中的位置
+    auto it = std::find(scenes.begin(), scenes.end(), current_scene_id_);
+    if (it != scenes.end()) {
+      size_t curr_index = std::distance(scenes.begin(), it);
+      size_t next_index = (curr_index + 1) % scenes.size();
+      ChangeScene(scenes[next_index]);
+    } else {
+      // 当前场景不在列表中时，可以选择切换到列表第一个
+      ChangeScene(scenes[0]);
+    }
+  }
+}
+
+void SceneManager::HandleAutoSwitch() {
   // switch scene base on current_scene_id_
   switch (current_scene_id_) {
     case SceneId::kLogo:
@@ -37,11 +64,6 @@ void SceneManager::Update() {
       break;
     default:
       break;
-  }
-  // scene update
-  auto it = scenes_.find(current_scene_id_);
-  if (it != scenes_.end() && it->second) {
-    it->second->Update();
   }
 }
 
