@@ -434,7 +434,7 @@ typedef Texture Texture2D;
 
 // Image, pixel data stored in CPU memory (RAM)
 typedef struct Image {
-  void *data;   // Image raw data
+  void* data;   // Image raw data
   int width;    // Image base width
   int height;   // Image base height
   int mipmaps;  // Mipmap levels, 1 by default
@@ -457,8 +457,8 @@ typedef struct Font {
   int glyphCount;     // Number of glyph characters
   int glyphPadding;   // Padding around the glyph characters
   Texture2D texture;  // Texture atlas containing the glyphs
-  Rectangle *recs;    // Rectangles in texture for the glyphs
-  GlyphInfo *glyphs;  // Glyphs info data
+  Rectangle* recs;    // Rectangles in texture for the glyphs
+  GlyphInfo* glyphs;  // Glyphs info data
 } Font;
 #endif
 
@@ -690,92 +690,92 @@ RAYGUIAPI void GuiSetStyle(int control, int property, int value);  // Set one st
 RAYGUIAPI int GuiGetStyle(int control, int property);              // Get one style property
 
 // Styles loading functions
-RAYGUIAPI void GuiLoadStyle(const char *fileName);  // Load style file over global style variable (.rgs)
+RAYGUIAPI void GuiLoadStyle(const char* fileName);  // Load style file over global style variable (.rgs)
 RAYGUIAPI void GuiLoadStyleDefault(void);           // Load style default over global style
 
 // Tooltips management functions
 RAYGUIAPI void GuiEnableTooltip(void);              // Enable gui tooltips (global state)
 RAYGUIAPI void GuiDisableTooltip(void);             // Disable gui tooltips (global state)
-RAYGUIAPI void GuiSetTooltip(const char *tooltip);  // Set tooltip string
+RAYGUIAPI void GuiSetTooltip(const char* tooltip);  // Set tooltip string
 
 // Icons functionality
-RAYGUIAPI const char *GuiIconText(int iconId, const char *text);  // Get text with icon id prepended (if supported)
+RAYGUIAPI const char* GuiIconText(int iconId, const char* text);  // Get text with icon id prepended (if supported)
 #if !defined(RAYGUI_NO_ICONS)
 RAYGUIAPI void GuiSetIconScale(int scale);  // Set default icon drawing size
-RAYGUIAPI unsigned int *GuiGetIcons(void);  // Get raygui icons data pointer
-RAYGUIAPI char **GuiLoadIcons(const char *fileName,
+RAYGUIAPI unsigned int* GuiGetIcons(void);  // Get raygui icons data pointer
+RAYGUIAPI char** GuiLoadIcons(const char* fileName,
                               bool loadIconsName);  // Load raygui icons file (.rgi) into internal icons data
 RAYGUIAPI void GuiDrawIcon(int iconId, int posX, int posY, int pixelSize,
                            Color color);  // Draw icon using pixel size at specified position
 #endif
 
 // Utility functions
-RAYGUIAPI int GuiGetTextWidth(const char *text);  // Get text width considering gui style and icon size (if required)
+RAYGUIAPI int GuiGetTextWidth(const char* text);  // Get text width considering gui style and icon size (if required)
 
 // Controls
 //----------------------------------------------------------------------------------------------------------
 // Container/separator controls, useful for controls organization
 RAYGUIAPI int GuiWindowBox(Rectangle bounds,
-                           const char *title);                  // Window Box control, shows a window that can be closed
-RAYGUIAPI int GuiGroupBox(Rectangle bounds, const char *text);  // Group Box control with text name
-RAYGUIAPI int GuiLine(Rectangle bounds, const char *text);      // Line separator control, could contain text
-RAYGUIAPI int GuiPanel(Rectangle bounds, const char *text);     // Panel control, useful to group controls
-RAYGUIAPI int GuiTabBar(Rectangle bounds, const char **text, int count,
-                        int *active);  // Tab Bar control, returns TAB to be closed or -1
-RAYGUIAPI int GuiScrollPanel(Rectangle bounds, const char *text, Rectangle content, Vector2 *scroll,
-                             Rectangle *view);  // Scroll Panel control
+                           const char* title);                  // Window Box control, shows a window that can be closed
+RAYGUIAPI int GuiGroupBox(Rectangle bounds, const char* text);  // Group Box control with text name
+RAYGUIAPI int GuiLine(Rectangle bounds, const char* text);      // Line separator control, could contain text
+RAYGUIAPI int GuiPanel(Rectangle bounds, const char* text);     // Panel control, useful to group controls
+RAYGUIAPI int GuiTabBar(Rectangle bounds, const char** text, int count,
+                        int* active);  // Tab Bar control, returns TAB to be closed or -1
+RAYGUIAPI int GuiScrollPanel(Rectangle bounds, const char* text, Rectangle content, Vector2* scroll,
+                             Rectangle* view);  // Scroll Panel control
 
 // Basic controls set
-RAYGUIAPI int GuiLabel(Rectangle bounds, const char *text);        // Label control
-RAYGUIAPI int GuiButton(Rectangle bounds, const char *text);       // Button control, returns true when clicked
-RAYGUIAPI int GuiLabelButton(Rectangle bounds, const char *text);  // Label button control, returns true when clicked
-RAYGUIAPI int GuiToggle(Rectangle bounds, const char *text, bool *active);       // Toggle Button control
-RAYGUIAPI int GuiToggleGroup(Rectangle bounds, const char *text, int *active);   // Toggle Group control
-RAYGUIAPI int GuiToggleSlider(Rectangle bounds, const char *text, int *active);  // Toggle Slider control
-RAYGUIAPI int GuiCheckBox(Rectangle bounds, const char *text,
-                          bool *checked);  // Check Box control, returns true when active
-RAYGUIAPI int GuiComboBox(Rectangle bounds, const char *text, int *active);  // Combo Box control
+RAYGUIAPI int GuiLabel(Rectangle bounds, const char* text);        // Label control
+RAYGUIAPI int GuiButton(Rectangle bounds, const char* text);       // Button control, returns true when clicked
+RAYGUIAPI int GuiLabelButton(Rectangle bounds, const char* text);  // Label button control, returns true when clicked
+RAYGUIAPI int GuiToggle(Rectangle bounds, const char* text, bool* active);       // Toggle Button control
+RAYGUIAPI int GuiToggleGroup(Rectangle bounds, const char* text, int* active);   // Toggle Group control
+RAYGUIAPI int GuiToggleSlider(Rectangle bounds, const char* text, int* active);  // Toggle Slider control
+RAYGUIAPI int GuiCheckBox(Rectangle bounds, const char* text,
+                          bool* checked);  // Check Box control, returns true when active
+RAYGUIAPI int GuiComboBox(Rectangle bounds, const char* text, int* active);  // Combo Box control
 
-RAYGUIAPI int GuiDropdownBox(Rectangle bounds, const char *text, int *active, bool editMode);  // Dropdown Box control
-RAYGUIAPI int GuiSpinner(Rectangle bounds, const char *text, int *value, int minValue, int maxValue,
+RAYGUIAPI int GuiDropdownBox(Rectangle bounds, const char* text, int* active, bool editMode);  // Dropdown Box control
+RAYGUIAPI int GuiSpinner(Rectangle bounds, const char* text, int* value, int minValue, int maxValue,
                          bool editMode);  // Spinner control
-RAYGUIAPI int GuiValueBox(Rectangle bounds, const char *text, int *value, int minValue, int maxValue,
+RAYGUIAPI int GuiValueBox(Rectangle bounds, const char* text, int* value, int minValue, int maxValue,
                           bool editMode);  // Value Box control, updates input text with numbers
-RAYGUIAPI int GuiValueBoxFloat(Rectangle bounds, const char *text, char *textValue, float *value,
+RAYGUIAPI int GuiValueBoxFloat(Rectangle bounds, const char* text, char* textValue, float* value,
                                bool editMode);  // Value box control for float values
-RAYGUIAPI int GuiTextBox(Rectangle bounds, char *text, int textSize,
+RAYGUIAPI int GuiTextBox(Rectangle bounds, char* text, int textSize,
                          bool editMode);  // Text Box control, updates input text
 
-RAYGUIAPI int GuiSlider(Rectangle bounds, const char *textLeft, const char *textRight, float *value, float minValue,
+RAYGUIAPI int GuiSlider(Rectangle bounds, const char* textLeft, const char* textRight, float* value, float minValue,
                         float maxValue);  // Slider control
-RAYGUIAPI int GuiSliderBar(Rectangle bounds, const char *textLeft, const char *textRight, float *value, float minValue,
+RAYGUIAPI int GuiSliderBar(Rectangle bounds, const char* textLeft, const char* textRight, float* value, float minValue,
                            float maxValue);  // Slider Bar control
-RAYGUIAPI int GuiProgressBar(Rectangle bounds, const char *textLeft, const char *textRight, float *value,
+RAYGUIAPI int GuiProgressBar(Rectangle bounds, const char* textLeft, const char* textRight, float* value,
                              float minValue, float maxValue);    // Progress Bar control
-RAYGUIAPI int GuiStatusBar(Rectangle bounds, const char *text);  // Status Bar control, shows info text
-RAYGUIAPI int GuiDummyRec(Rectangle bounds, const char *text);   // Dummy control for placeholders
-RAYGUIAPI int GuiGrid(Rectangle bounds, const char *text, float spacing, int subdivs,
-                      Vector2 *mouseCell);  // Grid control
+RAYGUIAPI int GuiStatusBar(Rectangle bounds, const char* text);  // Status Bar control, shows info text
+RAYGUIAPI int GuiDummyRec(Rectangle bounds, const char* text);   // Dummy control for placeholders
+RAYGUIAPI int GuiGrid(Rectangle bounds, const char* text, float spacing, int subdivs,
+                      Vector2* mouseCell);  // Grid control
 
 // Advance controls set
-RAYGUIAPI int GuiListView(Rectangle bounds, const char *text, int *scrollIndex, int *active);  // List View control
-RAYGUIAPI int GuiListViewEx(Rectangle bounds, const char **text, int count, int *scrollIndex, int *active,
-                            int *focus);  // List View with extended parameters
-RAYGUIAPI int GuiMessageBox(Rectangle bounds, const char *title, const char *message,
-                            const char *buttons);  // Message Box control, displays a message
-RAYGUIAPI int GuiTextInputBox(Rectangle bounds, const char *title, const char *message, const char *buttons, char *text,
+RAYGUIAPI int GuiListView(Rectangle bounds, const char* text, int* scrollIndex, int* active);  // List View control
+RAYGUIAPI int GuiListViewEx(Rectangle bounds, const char** text, int count, int* scrollIndex, int* active,
+                            int* focus);  // List View with extended parameters
+RAYGUIAPI int GuiMessageBox(Rectangle bounds, const char* title, const char* message,
+                            const char* buttons);  // Message Box control, displays a message
+RAYGUIAPI int GuiTextInputBox(Rectangle bounds, const char* title, const char* message, const char* buttons, char* text,
                               int textMaxSize,
-                              bool *secretViewActive);  // Text Input Box control, ask for text, supports secret
-RAYGUIAPI int GuiColorPicker(Rectangle bounds, const char *text,
-                             Color *color);  // Color Picker control (multiple color controls)
-RAYGUIAPI int GuiColorPanel(Rectangle bounds, const char *text, Color *color);     // Color Panel control
-RAYGUIAPI int GuiColorBarAlpha(Rectangle bounds, const char *text, float *alpha);  // Color Bar Alpha control
-RAYGUIAPI int GuiColorBarHue(Rectangle bounds, const char *text, float *value);    // Color Bar Hue control
+                              bool* secretViewActive);  // Text Input Box control, ask for text, supports secret
+RAYGUIAPI int GuiColorPicker(Rectangle bounds, const char* text,
+                             Color* color);  // Color Picker control (multiple color controls)
+RAYGUIAPI int GuiColorPanel(Rectangle bounds, const char* text, Color* color);     // Color Panel control
+RAYGUIAPI int GuiColorBarAlpha(Rectangle bounds, const char* text, float* alpha);  // Color Bar Alpha control
+RAYGUIAPI int GuiColorBarHue(Rectangle bounds, const char* text, float* value);    // Color Bar Hue control
 RAYGUIAPI int GuiColorPickerHSV(
-    Rectangle bounds, const char *text,
-    Vector3 *colorHsv);  // Color Picker control that avoids conversion to RGB on each call (multiple color controls)
-RAYGUIAPI int GuiColorPanelHSV(Rectangle bounds, const char *text,
-                               Vector3 *colorHsv);  // Color Panel control that updates Hue-Saturation-Value color
+    Rectangle bounds, const char* text,
+    Vector3* colorHsv);  // Color Picker control that avoids conversion to RGB on each call (multiple color controls)
+RAYGUIAPI int GuiColorPanelHSV(Rectangle bounds, const char* text,
+                               Vector3* colorHsv);  // Color Panel control that updates Hue-Saturation-Value color
                                                     // value, used by GuiColorPickerHSV()
 //----------------------------------------------------------------------------------------------------------
 
@@ -1633,7 +1633,7 @@ static unsigned int guiIcons[RAYGUI_ICON_MAX_ICONS * RAYGUI_ICON_DATA_ELEMENTS] 
 };
 
 // NOTE: A pointer to current icons array should be defined
-static unsigned int *guiIconsPtr = guiIcons;
+static unsigned int* guiIconsPtr = guiIcons;
 
 #endif  // !RAYGUI_NO_ICONS && !RAYGUI_CUSTOM_ICONS
 
@@ -1665,7 +1665,7 @@ static float guiAlpha = 1.0f;   // Gui controls transparency
 static unsigned int guiIconScale = 1;  // Gui icon default scale (if icons enabled)
 
 static bool guiTooltip = false;           // Tooltip enabled/disabled
-static const char *guiTooltipPtr = NULL;  // Tooltip string pointer (string provided by user)
+static const char* guiTooltipPtr = NULL;  // Tooltip string pointer (string provided by user)
 
 static bool guiControlExclusiveMode = false;  // Gui control exclusive mode (no inputs processed except current control)
 static Rectangle guiControlExclusiveRec = {0};  // Gui control exclusive bounds rectangle, used as an unique identifier
@@ -1731,7 +1731,7 @@ static void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color
 // Text required functions
 //-------------------------------------------------------------------------------
 static Font GetFontDefault(void);  // -- GuiLoadStyleDefault()
-static Font LoadFontEx(const char *fileName, int fontSize, int *codepoints,
+static Font LoadFontEx(const char* fileName, int fontSize, int* codepoints,
                        int codepointCount);  // -- GuiLoadStyle(), load font
 
 static Texture2D LoadTextureFromImage(
@@ -1739,18 +1739,18 @@ static Texture2D LoadTextureFromImage(
 static void SetShapesTexture(
     Texture2D tex, Rectangle rec);  // -- GuiLoadStyle(), required to set shapes rec to font white rec (optimization)
 
-static char *LoadFileText(const char *fileName);  // -- GuiLoadStyle(), required to load charset data
-static void UnloadFileText(char *text);           // -- GuiLoadStyle(), required to unload charset data
+static char* LoadFileText(const char* fileName);  // -- GuiLoadStyle(), required to load charset data
+static void UnloadFileText(char* text);           // -- GuiLoadStyle(), required to unload charset data
 
-static const char *GetDirectoryPath(
-    const char *filePath);  // -- GuiLoadStyle(), required to find charset/font file from text .rgs
+static const char* GetDirectoryPath(
+    const char* filePath);  // -- GuiLoadStyle(), required to find charset/font file from text .rgs
 
-static int *LoadCodepoints(const char *text,
-                           int *count);         // -- GuiLoadStyle(), required to load required font codepoints list
-static void UnloadCodepoints(int *codepoints);  // -- GuiLoadStyle(), required to unload codepoints list
+static int* LoadCodepoints(const char* text,
+                           int* count);         // -- GuiLoadStyle(), required to load required font codepoints list
+static void UnloadCodepoints(int* codepoints);  // -- GuiLoadStyle(), required to unload codepoints list
 
-static unsigned char *DecompressData(const unsigned char *compData, int compDataSize,
-                                     int *dataSize);  // -- GuiLoadStyle()
+static unsigned char* DecompressData(const unsigned char* compData, int compDataSize,
+                                     int* dataSize);  // -- GuiLoadStyle()
 //-------------------------------------------------------------------------------
 
 // raylib functions already implemented in raygui
@@ -1758,14 +1758,14 @@ static unsigned char *DecompressData(const unsigned char *compData, int compData
 static Color GetColor(int hexValue);                               // Returns a Color struct from hexadecimal value
 static int ColorToInt(Color color);                                // Returns hexadecimal value for a Color
 static bool CheckCollisionPointRec(Vector2 point, Rectangle rec);  // Check if point is inside rectangle
-static const char *TextFormat(const char *text, ...);              // Formatting of text with variables to 'embed'
-static const char **TextSplit(const char *text, char delimiter, int *count);  // Split text into multiple strings
-static int TextToInteger(const char *text);                                   // Get integer value from text
-static float TextToFloat(const char *text);                                   // Get float value from text
+static const char* TextFormat(const char* text, ...);              // Formatting of text with variables to 'embed'
+static const char** TextSplit(const char* text, char delimiter, int* count);  // Split text into multiple strings
+static int TextToInteger(const char* text);                                   // Get integer value from text
+static float TextToFloat(const char* text);                                   // Get float value from text
 
-static int GetCodepointNext(const char *text, int *codepointSize);  // Get next codepoint in a UTF-8 encoded text
-static const char *CodepointToUTF8(
-    int codepoint, int *byteSize);  // Encode codepoint into UTF-8 text (char array size returned as parameter)
+static int GetCodepointNext(const char* text, int* codepointSize);  // Get next codepoint in a UTF-8 encoded text
+static const char* CodepointToUTF8(
+    int codepoint, int* byteSize);  // Encode codepoint into UTF-8 text (char array size returned as parameter)
 
 static void DrawRectangleGradientV(int posX, int posY, int width, int height, Color color1,
                                    Color color2);  // Draw rectangle vertical gradient
@@ -1776,19 +1776,19 @@ static void DrawRectangleGradientV(int posX, int posY, int width, int height, Co
 //----------------------------------------------------------------------------------
 // Module specific Functions Declaration
 //----------------------------------------------------------------------------------
-static void GuiLoadStyleFromMemory(const unsigned char *fileData,
+static void GuiLoadStyleFromMemory(const unsigned char* fileData,
                                    int dataSize);  // Load style from memory (binary only)
 
 static Rectangle GetTextBounds(int control, Rectangle bounds);  // Get text bounds considering control bounds
-static const char *GetTextIcon(const char *text, int *iconId);  // Get text icon if provided and move text cursor
+static const char* GetTextIcon(const char* text, int* iconId);  // Get text icon if provided and move text cursor
 
-static void GuiDrawText(const char *text, Rectangle textBounds, int alignment,
+static void GuiDrawText(const char* text, Rectangle textBounds, int alignment,
                         Color tint);  // Gui draw text using default font
 static void GuiDrawRectangle(Rectangle rec, int borderWidth, Color borderColor,
                              Color color);  // Gui draw rectangle using default raygui style
 
-static const char **GuiTextSplit(const char *text, char delimiter, int *count,
-                                 int *textRow);  // Split controls text into multiple strings
+static const char** GuiTextSplit(const char* text, char delimiter, int* count,
+                                 int* textRow);  // Split controls text into multiple strings
 static Vector3 ConvertHSVtoRGB(Vector3 hsv);     // Convert color data from HSV to RGB
 static Vector3 ConvertRGBtoHSV(Vector3 rgb);     // Convert color data from RGB to HSV
 
@@ -1877,7 +1877,7 @@ int GuiGetStyle(int control, int property) {
 //----------------------------------------------------------------------------------
 
 // Window Box control
-int GuiWindowBox(Rectangle bounds, const char *title) {
+int GuiWindowBox(Rectangle bounds, const char* title) {
 // Window title bar height (including borders)
 // NOTE: This define is also used by GuiMessageBox() and GuiTextInputBox()
 #if !defined(RAYGUI_WINDOWBOX_STATUSBAR_HEIGHT)
@@ -1932,7 +1932,7 @@ int GuiWindowBox(Rectangle bounds, const char *title) {
 }
 
 // Group Box control with text name
-int GuiGroupBox(Rectangle bounds, const char *text) {
+int GuiGroupBox(Rectangle bounds, const char* text) {
 #if !defined(RAYGUI_GROUPBOX_LINE_THICK)
 #define RAYGUI_GROUPBOX_LINE_THICK 1
 #endif
@@ -1961,7 +1961,7 @@ int GuiGroupBox(Rectangle bounds, const char *text) {
 }
 
 // Line control
-int GuiLine(Rectangle bounds, const char *text) {
+int GuiLine(Rectangle bounds, const char* text) {
 #if !defined(RAYGUI_LINE_MARGIN_TEXT)
 #define RAYGUI_LINE_MARGIN_TEXT 12
 #endif
@@ -2004,7 +2004,7 @@ int GuiLine(Rectangle bounds, const char *text) {
 }
 
 // Panel control
-int GuiPanel(Rectangle bounds, const char *text) {
+int GuiPanel(Rectangle bounds, const char* text) {
 #if !defined(RAYGUI_PANEL_BORDER_WIDTH)
 #define RAYGUI_PANEL_BORDER_WIDTH 1
 #endif
@@ -2038,7 +2038,7 @@ int GuiPanel(Rectangle bounds, const char *text) {
 
 // Tab Bar control
 // NOTE: Using GuiToggle() for the TABS
-int GuiTabBar(Rectangle bounds, const char **text, int count, int *active) {
+int GuiTabBar(Rectangle bounds, const char** text, int count, int* active) {
 #define RAYGUI_TABBAR_ITEM_WIDTH 160
 
   int result = -1;
@@ -2113,7 +2113,7 @@ int GuiTabBar(Rectangle bounds, const char **text, int count, int *active) {
 }
 
 // Scroll Panel control
-int GuiScrollPanel(Rectangle bounds, const char *text, Rectangle content, Vector2 *scroll, Rectangle *view) {
+int GuiScrollPanel(Rectangle bounds, const char* text, Rectangle content, Vector2* scroll, Rectangle* view) {
 #define RAYGUI_MIN_SCROLLBAR_WIDTH 40
 #define RAYGUI_MIN_SCROLLBAR_HEIGHT 40
 #define RAYGUI_MIN_MOUSE_WHEEL_SPEED 20
@@ -2309,7 +2309,7 @@ int GuiScrollPanel(Rectangle bounds, const char *text, Rectangle content, Vector
 }
 
 // Label control
-int GuiLabel(Rectangle bounds, const char *text) {
+int GuiLabel(Rectangle bounds, const char* text) {
   int result = 0;
   GuiState state = guiState;
 
@@ -2328,7 +2328,7 @@ int GuiLabel(Rectangle bounds, const char *text) {
 }
 
 // Button control, returns true when clicked
-int GuiButton(Rectangle bounds, const char *text) {
+int GuiButton(Rectangle bounds, const char* text) {
   int result = 0;
   GuiState state = guiState;
 
@@ -2363,7 +2363,7 @@ int GuiButton(Rectangle bounds, const char *text) {
 }
 
 // Label button control
-int GuiLabelButton(Rectangle bounds, const char *text) {
+int GuiLabelButton(Rectangle bounds, const char* text) {
   GuiState state = guiState;
   bool pressed = false;
 
@@ -2399,7 +2399,7 @@ int GuiLabelButton(Rectangle bounds, const char *text) {
 }
 
 // Toggle Button control
-int GuiToggle(Rectangle bounds, const char *text, bool *active) {
+int GuiToggle(Rectangle bounds, const char* text, bool* active) {
   int result = 0;
   GuiState state = guiState;
 
@@ -2446,7 +2446,7 @@ int GuiToggle(Rectangle bounds, const char *text, bool *active) {
 }
 
 // Toggle Group control
-int GuiToggleGroup(Rectangle bounds, const char *text, int *active) {
+int GuiToggleGroup(Rectangle bounds, const char* text, int* active) {
 #if !defined(RAYGUI_TOGGLEGROUP_MAX_ITEMS)
 #define RAYGUI_TOGGLEGROUP_MAX_ITEMS 32
 #endif
@@ -2462,7 +2462,7 @@ int GuiToggleGroup(Rectangle bounds, const char *text, int *active) {
   // Get substrings items from text (items pointers)
   int rows[RAYGUI_TOGGLEGROUP_MAX_ITEMS] = {0};
   int itemCount = 0;
-  const char **items = GuiTextSplit(text, ';', &itemCount, rows);
+  const char** items = GuiTextSplit(text, ';', &itemCount, rows);
 
   int prevRow = rows[0];
 
@@ -2489,7 +2489,7 @@ int GuiToggleGroup(Rectangle bounds, const char *text, int *active) {
 }
 
 // Toggle Slider control extended
-int GuiToggleSlider(Rectangle bounds, const char *text, int *active) {
+int GuiToggleSlider(Rectangle bounds, const char* text, int* active) {
   int result = 0;
   GuiState state = guiState;
 
@@ -2500,7 +2500,7 @@ int GuiToggleSlider(Rectangle bounds, const char *text, int *active) {
 
   // Get substrings items from text (items pointers)
   int itemCount = 0;
-  const char **items = NULL;
+  const char** items = NULL;
 
   if (text != NULL) items = GuiTextSplit(text, ';', &itemCount, NULL);
 
@@ -2565,7 +2565,7 @@ int GuiToggleSlider(Rectangle bounds, const char *text, int *active) {
 }
 
 // Check Box control, returns 1 when state changed
-int GuiCheckBox(Rectangle bounds, const char *text, bool *checked) {
+int GuiCheckBox(Rectangle bounds, const char* text, bool* checked) {
   int result = 0;
   GuiState state = guiState;
 
@@ -2633,7 +2633,7 @@ int GuiCheckBox(Rectangle bounds, const char *text, bool *checked) {
 }
 
 // Combo Box control
-int GuiComboBox(Rectangle bounds, const char *text, int *active) {
+int GuiComboBox(Rectangle bounds, const char* text, int* active) {
   int result = 0;
   GuiState state = guiState;
 
@@ -2647,7 +2647,7 @@ int GuiComboBox(Rectangle bounds, const char *text, int *active) {
 
   // Get substrings items from text (items pointers, lengths and count)
   int itemCount = 0;
-  const char **items = GuiTextSplit(text, ';', &itemCount, NULL);
+  const char** items = GuiTextSplit(text, ';', &itemCount, NULL);
 
   if (*active < 0)
     *active = 0;
@@ -2699,7 +2699,7 @@ int GuiComboBox(Rectangle bounds, const char *text, int *active) {
 
 // Dropdown Box control
 // NOTE: Returns mouse click
-int GuiDropdownBox(Rectangle bounds, const char *text, int *active, bool editMode) {
+int GuiDropdownBox(Rectangle bounds, const char* text, int* active, bool editMode) {
   int result = 0;
   GuiState state = guiState;
 
@@ -2714,7 +2714,7 @@ int GuiDropdownBox(Rectangle bounds, const char *text, int *active, bool editMod
 
   // Get substrings items from text (items pointers, lengths and count)
   int itemCount = 0;
-  const char **items = GuiTextSplit(text, ';', &itemCount, NULL);
+  const char** items = GuiTextSplit(text, ';', &itemCount, NULL);
 
   Rectangle boundsOpen = bounds;
   boundsOpen.height = (itemCount + 1) * (bounds.height + GuiGetStyle(DROPDOWNBOX, DROPDOWN_ITEMS_SPACING));
@@ -2832,7 +2832,7 @@ int GuiDropdownBox(Rectangle bounds, const char *text, int *active, bool editMod
 
 // Text Box control
 // NOTE: Returns true on ENTER pressed (useful for data validation)
-int GuiTextBox(Rectangle bounds, char *text, int textSize, bool editMode) {
+int GuiTextBox(Rectangle bounds, char* text, int textSize, bool editMode) {
 #if !defined(RAYGUI_TEXTBOX_AUTO_CURSOR_COOLDOWN)
 #define RAYGUI_TEXTBOX_AUTO_CURSOR_COOLDOWN 30  // Frames to wait for autocursor movement
 #endif
@@ -2916,11 +2916,11 @@ int GuiTextBox(Rectangle bounds, char *text, int textSize, bool editMode) {
 
       // Encode codepoint as UTF-8
       int codepointSize = 0;
-      const char *charEncoded = CodepointToUTF8(codepoint, &codepointSize);
+      const char* charEncoded = CodepointToUTF8(codepoint, &codepointSize);
 
       // Handle Paste action
       if (IsKeyPressed(KEY_V) && (IsKeyDown(KEY_LEFT_CONTROL) || IsKeyDown(KEY_RIGHT_CONTROL))) {
-        const char *pasteText = GetClipboardText();
+        const char* pasteText = GetClipboardText();
         if (pasteText != NULL) {
           int pasteLength = 0;
           int pasteCodepoint;
@@ -3261,7 +3261,7 @@ supported GuiSetStyle(DEFAULT, TEXT_ALIGNMENT_VERTICAL, TEXT_ALIGN_TOP);
 */
 
 // Spinner control, returns selected value
-int GuiSpinner(Rectangle bounds, const char *text, int *value, int minValue, int maxValue, bool editMode) {
+int GuiSpinner(Rectangle bounds, const char* text, int* value, int minValue, int maxValue, bool editMode) {
   int result = 1;
   GuiState state = guiState;
 
@@ -3341,7 +3341,7 @@ int GuiSpinner(Rectangle bounds, const char *text, int *value, int minValue, int
 
 // Value Box control, updates input text with numbers
 // NOTE: Requires static variables: frameCounter
-int GuiValueBox(Rectangle bounds, const char *text, int *value, int minValue, int maxValue, bool editMode) {
+int GuiValueBox(Rectangle bounds, const char* text, int* value, int minValue, int maxValue, bool editMode) {
 #if !defined(RAYGUI_VALUEBOX_MAX_CHARS)
 #define RAYGUI_VALUEBOX_MAX_CHARS 32
 #endif
@@ -3479,9 +3479,37 @@ int GuiValueBox(Rectangle bounds, const char *text, int *value, int minValue, in
   return result;
 }
 
+// Get float value from text
+// NOTE: This function replaces atof() [stdlib.h]
+// WARNING: Only '.' character is understood as decimal point
+static float TextToFloat(const char* text) {
+  float value = 0.0f;
+  float sign = 1.0f;
+
+  if ((text[0] == '+') || (text[0] == '-')) {
+    if (text[0] == '-') sign = -1.0f;
+    text++;
+  }
+
+  int i = 0;
+  for (; ((text[i] >= '0') && (text[i] <= '9')); i++) value = value * 10.0f + (float)(text[i] - '0');
+
+  if (text[i++] != '.')
+    value *= sign;
+  else {
+    float divisor = 10.0f;
+    for (; ((text[i] >= '0') && (text[i] <= '9')); i++) {
+      value += ((float)(text[i] - '0')) / divisor;
+      divisor = divisor * 10.0f;
+    }
+  }
+
+  return value;
+}
+
 // Floating point Value Box control, updates input val_str with numbers
 // NOTE: Requires static variables: frameCounter
-int GuiValueBoxFloat(Rectangle bounds, const char *text, char *textValue, float *value, bool editMode) {
+int GuiValueBoxFloat(Rectangle bounds, const char* text, char* textValue, float* value, bool editMode) {
 #if !defined(RAYGUI_VALUEBOX_MAX_CHARS)
 #define RAYGUI_VALUEBOX_MAX_CHARS 32
 #endif
@@ -3608,7 +3636,7 @@ int GuiValueBoxFloat(Rectangle bounds, const char *text, char *textValue, float 
 
 // Slider control with pro parameters
 // NOTE: Other GuiSlider*() controls use this one
-int GuiSlider(Rectangle bounds, const char *textLeft, const char *textRight, float *value, float minValue,
+int GuiSlider(Rectangle bounds, const char* textLeft, const char* textRight, float* value, float minValue,
               float maxValue) {
   int result = 0;
   GuiState state = guiState;
@@ -3729,7 +3757,7 @@ int GuiSlider(Rectangle bounds, const char *textLeft, const char *textRight, flo
 }
 
 // Slider Bar control extended, returns selected value
-int GuiSliderBar(Rectangle bounds, const char *textLeft, const char *textRight, float *value, float minValue,
+int GuiSliderBar(Rectangle bounds, const char* textLeft, const char* textRight, float* value, float minValue,
                  float maxValue) {
   int result = 0;
   int preSliderWidth = GuiGetStyle(SLIDER, SLIDER_WIDTH);
@@ -3741,7 +3769,7 @@ int GuiSliderBar(Rectangle bounds, const char *textLeft, const char *textRight, 
 }
 
 // Progress Bar control extended, shows current progress value
-int GuiProgressBar(Rectangle bounds, const char *textLeft, const char *textRight, float *value, float minValue,
+int GuiProgressBar(Rectangle bounds, const char* textLeft, const char* textRight, float* value, float minValue,
                    float maxValue) {
   int result = 0;
   GuiState state = guiState;
@@ -3847,7 +3875,7 @@ int GuiProgressBar(Rectangle bounds, const char *textLeft, const char *textRight
 }
 
 // Status Bar control
-int GuiStatusBar(Rectangle bounds, const char *text) {
+int GuiStatusBar(Rectangle bounds, const char* text) {
   int result = 0;
   GuiState state = guiState;
 
@@ -3863,7 +3891,7 @@ int GuiStatusBar(Rectangle bounds, const char *text) {
 }
 
 // Dummy rectangle control, intended for placeholding
-int GuiDummyRec(Rectangle bounds, const char *text) {
+int GuiDummyRec(Rectangle bounds, const char* text) {
   int result = 0;
   GuiState state = guiState;
 
@@ -3894,10 +3922,10 @@ int GuiDummyRec(Rectangle bounds, const char *text) {
 }
 
 // List View control
-int GuiListView(Rectangle bounds, const char *text, int *scrollIndex, int *active) {
+int GuiListView(Rectangle bounds, const char* text, int* scrollIndex, int* active) {
   int result = 0;
   int itemCount = 0;
-  const char **items = NULL;
+  const char** items = NULL;
 
   if (text != NULL) items = GuiTextSplit(text, ';', &itemCount, NULL);
 
@@ -3907,7 +3935,7 @@ int GuiListView(Rectangle bounds, const char *text, int *scrollIndex, int *activ
 }
 
 // List View control with extended parameters
-int GuiListViewEx(Rectangle bounds, const char **text, int count, int *scrollIndex, int *active, int *focus) {
+int GuiListViewEx(Rectangle bounds, const char** text, int count, int* scrollIndex, int* active, int* focus) {
   int result = 0;
   GuiState state = guiState;
 
@@ -4059,7 +4087,7 @@ int GuiListViewEx(Rectangle bounds, const char **text, int count, int *scrollInd
 }
 
 // Color Panel control - Color (RGBA) variant
-int GuiColorPanel(Rectangle bounds, const char *text, Color *color) {
+int GuiColorPanel(Rectangle bounds, const char* text, Color* color) {
   int result = 0;
 
   Vector3 vcolor = {(float)color->r / 255.0f, (float)color->g / 255.0f, (float)color->b / 255.0f};
@@ -4085,7 +4113,7 @@ int GuiColorPanel(Rectangle bounds, const char *text, Color *color) {
 
 // Color Bar Alpha control
 // NOTE: Returns alpha value normalized [0..1]
-int GuiColorBarAlpha(Rectangle bounds, const char *text, float *alpha) {
+int GuiColorBarAlpha(Rectangle bounds, const char* text, float* alpha) {
 #if !defined(RAYGUI_COLORBARALPHA_CHECKED_SIZE)
 #define RAYGUI_COLORBARALPHA_CHECKED_SIZE 10
 #endif
@@ -4177,7 +4205,7 @@ int GuiColorBarAlpha(Rectangle bounds, const char *text, float *alpha) {
 //      Color GuiColorBarSat() [WHITE->color]
 //      Color GuiColorBarValue() [BLACK->color], HSV/HSL
 //      float GuiColorBarLuminance() [BLACK->WHITE]
-int GuiColorBarHue(Rectangle bounds, const char *text, float *hue) {
+int GuiColorBarHue(Rectangle bounds, const char* text, float* hue) {
   int result = 0;
   GuiState state = guiState;
   Rectangle selector = {
@@ -4278,7 +4306,7 @@ int GuiColorBarHue(Rectangle bounds, const char *text, float *hue) {
 // NOTE: bounds define GuiColorPanel() size
 // NOTE: this picker converts RGB to HSV, which can cause the Hue control to jump. If you have this problem, consider
 // using the HSV variant instead
-int GuiColorPicker(Rectangle bounds, const char *text, Color *color) {
+int GuiColorPicker(Rectangle bounds, const char* text, Color* color) {
   int result = 0;
 
   Color temp = {200, 0, 0, 255};
@@ -4314,7 +4342,7 @@ int GuiColorPicker(Rectangle bounds, const char *text, Color *color) {
 //      int GuiColorBarAlpha(Rectangle bounds, const char *text, float *alpha)
 //      float GuiColorBarHue(Rectangle bounds, float value)
 // NOTE: bounds define GuiColorPanelHSV() size
-int GuiColorPickerHSV(Rectangle bounds, const char *text, Vector3 *colorHsv) {
+int GuiColorPickerHSV(Rectangle bounds, const char* text, Vector3* colorHsv) {
   int result = 0;
 
   Vector3 tempHsv = {0};
@@ -4336,7 +4364,7 @@ int GuiColorPickerHSV(Rectangle bounds, const char *text, Vector3 *colorHsv) {
 }
 
 // Color Panel control - HSV variant
-int GuiColorPanelHSV(Rectangle bounds, const char *text, Vector3 *colorHsv) {
+int GuiColorPanelHSV(Rectangle bounds, const char* text, Vector3* colorHsv) {
   int result = 0;
   GuiState state = guiState;
   Vector2 pickerSelector = {0};
@@ -4430,7 +4458,7 @@ int GuiColorPanelHSV(Rectangle bounds, const char *text, Vector3 *colorHsv) {
 }
 
 // Message Box control
-int GuiMessageBox(Rectangle bounds, const char *title, const char *message, const char *buttons) {
+int GuiMessageBox(Rectangle bounds, const char* title, const char* message, const char* buttons) {
 #if !defined(RAYGUI_MESSAGEBOX_BUTTON_HEIGHT)
 #define RAYGUI_MESSAGEBOX_BUTTON_HEIGHT 24
 #endif
@@ -4441,7 +4469,7 @@ int GuiMessageBox(Rectangle bounds, const char *title, const char *message, cons
   int result = -1;  // Returns clicked button from buttons list, 0 refers to closed window button
 
   int buttonCount = 0;
-  const char **buttonsText = GuiTextSplit(buttons, ';', &buttonCount, NULL);
+  const char** buttonsText = GuiTextSplit(buttons, ';', &buttonCount, NULL);
   Rectangle buttonBounds = {0};
   buttonBounds.x = bounds.x + RAYGUI_MESSAGEBOX_BUTTON_PADDING;
   buttonBounds.y = bounds.y + bounds.height - RAYGUI_MESSAGEBOX_BUTTON_HEIGHT - RAYGUI_MESSAGEBOX_BUTTON_PADDING;
@@ -4481,8 +4509,8 @@ int GuiMessageBox(Rectangle bounds, const char *title, const char *message, cons
 }
 
 // Text Input Box control, ask for text
-int GuiTextInputBox(Rectangle bounds, const char *title, const char *message, const char *buttons, char *text,
-                    int textMaxSize, bool *secretViewActive) {
+int GuiTextInputBox(Rectangle bounds, const char* title, const char* message, const char* buttons, char* text,
+                    int textMaxSize, bool* secretViewActive) {
 #if !defined(RAYGUI_TEXTINPUTBOX_BUTTON_HEIGHT)
 #define RAYGUI_TEXTINPUTBOX_BUTTON_HEIGHT 24
 #endif
@@ -4500,7 +4528,7 @@ int GuiTextInputBox(Rectangle bounds, const char *title, const char *message, co
   int result = -1;
 
   int buttonCount = 0;
-  const char **buttonsText = GuiTextSplit(buttons, ';', &buttonCount, NULL);
+  const char** buttonsText = GuiTextSplit(buttons, ';', &buttonCount, NULL);
   Rectangle buttonBounds = {0};
   buttonBounds.x = bounds.x + RAYGUI_TEXTINPUTBOX_BUTTON_PADDING;
   buttonBounds.y = bounds.y + bounds.height - RAYGUI_TEXTINPUTBOX_BUTTON_HEIGHT - RAYGUI_TEXTINPUTBOX_BUTTON_PADDING;
@@ -4579,7 +4607,7 @@ int GuiTextInputBox(Rectangle bounds, const char *title, const char *message, co
 // NOTE: Returns grid mouse-hover selected cell
 // About drawing lines at subpixel spacing, simple put, not easy solution:
 // https://stackoverflow.com/questions/4435450/2d-opengl-drawing-lines-that-dont-exactly-fit-pixel-raster
-int GuiGrid(Rectangle bounds, const char *text, float spacing, int subdivs, Vector2 *mouseCell) {
+int GuiGrid(Rectangle bounds, const char* text, float spacing, int subdivs, Vector2* mouseCell) {
 // Grid lines alpha amount
 #if !defined(RAYGUI_GRID_ALPHA)
 #define RAYGUI_GRID_ALPHA 0.15f
@@ -4645,7 +4673,7 @@ void GuiEnableTooltip(void) { guiTooltip = true; }
 void GuiDisableTooltip(void) { guiTooltip = false; }
 
 // Set tooltip string
-void GuiSetTooltip(const char *tooltip) { guiTooltipPtr = tooltip; }
+void GuiSetTooltip(const char* tooltip) { guiTooltipPtr = tooltip; }
 
 //----------------------------------------------------------------------------------
 // Styles loading functions
@@ -4654,14 +4682,14 @@ void GuiSetTooltip(const char *tooltip) { guiTooltipPtr = tooltip; }
 // Load raygui style file (.rgs)
 // NOTE: By default a binary file is expected, that file could contain a custom font,
 // in that case, custom font image atlas is GRAY+ALPHA and pixel data can be compressed (DEFLATE)
-void GuiLoadStyle(const char *fileName) {
+void GuiLoadStyle(const char* fileName) {
 #define MAX_LINE_BUFFER_SIZE 256
 
   bool tryBinary = false;
   if (!guiStyleLoaded) GuiLoadStyleDefault();
 
   // Try reading the files as text file first
-  FILE *rgsFile = fopen(fileName, "rt");
+  FILE* rgsFile = fopen(fileName, "rt");
 
   if (rgsFile != NULL) {
     char buffer[MAX_LINE_BUFFER_SIZE] = {0};
@@ -4690,13 +4718,13 @@ void GuiLoadStyle(const char *fileName) {
             sscanf(buffer, "f %d %s %[^\r\n]s", &fontSize, charmapFileName, fontFileName);
 
             Font font = {0};
-            int *codepoints = NULL;
+            int* codepoints = NULL;
             int codepointCount = 0;
 
             if (charmapFileName[0] != '0') {
               // Load text data from file
               // NOTE: Expected an UTF-8 array of codepoints, no separation
-              char *textData = LoadFileText(TextFormat("%s/%s", GetDirectoryPath(fileName), charmapFileName));
+              char* textData = LoadFileText(TextFormat("%s/%s", GetDirectoryPath(fileName), charmapFileName));
               codepoints = LoadCodepoints(textData, &codepointCount);
               UnloadFileText(textData);
             }
@@ -4746,7 +4774,7 @@ void GuiLoadStyle(const char *fileName) {
       fseek(rgsFile, 0, SEEK_SET);
 
       if (fileDataSize > 0) {
-        unsigned char *fileData = (unsigned char *)RAYGUI_MALLOC(fileDataSize * sizeof(unsigned char));
+        unsigned char* fileData = (unsigned char*)RAYGUI_MALLOC(fileDataSize * sizeof(unsigned char));
         fread(fileData, sizeof(unsigned char), fileDataSize, rgsFile);
 
         GuiLoadStyleFromMemory(fileData, fileDataSize);
@@ -4865,7 +4893,7 @@ void GuiLoadStyleDefault(void) {
 // Get text with icon id prepended
 // NOTE: Useful to add icons by name id (enum) instead of
 // a number that can change between ricon versions
-const char *GuiIconText(int iconId, const char *text) {
+const char* GuiIconText(int iconId, const char* text) {
 #if defined(RAYGUI_NO_ICONS)
   return NULL;
 #else
@@ -4892,13 +4920,13 @@ const char *GuiIconText(int iconId, const char *text) {
 
 #if !defined(RAYGUI_NO_ICONS)
 // Get full icons data pointer
-unsigned int *GuiGetIcons(void) { return guiIconsPtr; }
+unsigned int* GuiGetIcons(void) { return guiIconsPtr; }
 
 // Load raygui icons file (.rgi)
 // NOTE: In case nameIds are required, they can be requested with loadIconsName,
 // they are returned as a guiIconsName[iconCount][RAYGUI_ICON_MAX_NAME_LENGTH],
 // WARNING: guiIconsName[]][] memory should be manually freed!
-char **GuiLoadIcons(const char *fileName, bool loadIconsName) {
+char** GuiLoadIcons(const char* fileName, bool loadIconsName) {
   // Style File Structure (.rgi)
   // ------------------------------------------------------
   // Offset  | Size    | Type       | Description
@@ -4923,9 +4951,9 @@ char **GuiLoadIcons(const char *fileName, bool loadIconsName) {
   //   ...   | K       | unsigned int | Icon Data
   // }
 
-  FILE *rgiFile = fopen(fileName, "rb");
+  FILE* rgiFile = fopen(fileName, "rb");
 
-  char **guiIconsName = NULL;
+  char** guiIconsName = NULL;
 
   if (rgiFile != NULL) {
     char signature[5] = {0};
@@ -4942,9 +4970,9 @@ char **GuiLoadIcons(const char *fileName, bool loadIconsName) {
 
     if ((signature[0] == 'r') && (signature[1] == 'G') && (signature[2] == 'I') && (signature[3] == ' ')) {
       if (loadIconsName) {
-        guiIconsName = (char **)RAYGUI_MALLOC(iconCount * sizeof(char **));
+        guiIconsName = (char**)RAYGUI_MALLOC(iconCount * sizeof(char**));
         for (int i = 0; i < iconCount; i++) {
-          guiIconsName[i] = (char *)RAYGUI_MALLOC(RAYGUI_ICON_MAX_NAME_LENGTH);
+          guiIconsName[i] = (char*)RAYGUI_MALLOC(RAYGUI_ICON_MAX_NAME_LENGTH);
           fread(guiIconsName[i], 1, RAYGUI_ICON_MAX_NAME_LENGTH, rgiFile);
         }
       } else
@@ -4962,9 +4990,9 @@ char **GuiLoadIcons(const char *fileName, bool loadIconsName) {
 
 // Load icons from memory
 // WARNING: Binary files only
-char **GuiLoadIconsFromMemory(const unsigned char *fileData, int dataSize, bool loadIconsName) {
-  unsigned char *fileDataPtr = (unsigned char *)fileData;
-  char **guiIconsName = NULL;
+char** GuiLoadIconsFromMemory(const unsigned char* fileData, int dataSize, bool loadIconsName) {
+  unsigned char* fileDataPtr = (unsigned char*)fileData;
+  char** guiIconsName = NULL;
 
   char signature[5] = {0};
   short version = 0;
@@ -4981,9 +5009,9 @@ char **GuiLoadIconsFromMemory(const unsigned char *fileData, int dataSize, bool 
 
   if ((signature[0] == 'r') && (signature[1] == 'G') && (signature[2] == 'I') && (signature[3] == ' ')) {
     if (loadIconsName) {
-      guiIconsName = (char **)RAYGUI_MALLOC(iconCount * sizeof(char *));
+      guiIconsName = (char**)RAYGUI_MALLOC(iconCount * sizeof(char*));
       for (int i = 0; i < iconCount; i++) {
-        guiIconsName[i] = (char *)RAYGUI_MALLOC(RAYGUI_ICON_MAX_NAME_LENGTH);
+        guiIconsName[i] = (char*)RAYGUI_MALLOC(RAYGUI_ICON_MAX_NAME_LENGTH);
         memcpy(guiIconsName[i], fileDataPtr, RAYGUI_ICON_MAX_NAME_LENGTH);
         fileDataPtr += RAYGUI_ICON_MAX_NAME_LENGTH;
       }
@@ -4993,7 +5021,7 @@ char **GuiLoadIconsFromMemory(const unsigned char *fileData, int dataSize, bool 
     }
 
     int iconDataSize = iconCount * ((int)iconSize * (int)iconSize / 32) * (int)sizeof(unsigned int);
-    guiIconsPtr = (unsigned int *)RAYGUI_MALLOC(iconDataSize);
+    guiIconsPtr = (unsigned int*)RAYGUI_MALLOC(iconDataSize);
 
     memcpy(guiIconsPtr, fileDataPtr, iconDataSize);
   }
@@ -5026,7 +5054,7 @@ void GuiSetIconScale(int scale) {
 }
 
 // Get text width considering gui style and icon size (if required)
-int GuiGetTextWidth(const char *text) {
+int GuiGetTextWidth(const char* text) {
 #if !defined(ICON_TEXT_PADDING)
 #define ICON_TEXT_PADDING 4
 #endif
@@ -5091,8 +5119,8 @@ int GuiGetTextWidth(const char *text) {
 
 // Load style from memory
 // WARNING: Binary files only
-static void GuiLoadStyleFromMemory(const unsigned char *fileData, int dataSize) {
-  unsigned char *fileDataPtr = (unsigned char *)fileData;
+static void GuiLoadStyleFromMemory(const unsigned char* fileData, int dataSize) {
+  unsigned char* fileDataPtr = (unsigned char*)fileData;
 
   char signature[5] = {0};
   short version = 0;
@@ -5167,7 +5195,7 @@ static void GuiLoadStyleFromMemory(const unsigned char *fileData, int dataSize) 
       if ((fontImageCompSize > 0) && (fontImageCompSize != fontImageUncompSize)) {
         // Compressed font atlas image data (DEFLATE), it requires DecompressData()
         int dataUncompSize = 0;
-        unsigned char *compData = (unsigned char *)RAYGUI_MALLOC(fontImageCompSize);
+        unsigned char* compData = (unsigned char*)RAYGUI_MALLOC(fontImageCompSize);
         memcpy(compData, fileDataPtr, fontImageCompSize);
         fileDataPtr += fontImageCompSize;
 
@@ -5180,7 +5208,7 @@ static void GuiLoadStyleFromMemory(const unsigned char *fileData, int dataSize) 
         RAYGUI_FREE(compData);
       } else {
         // Font atlas image data is not compressed
-        imFont.data = (unsigned char *)RAYGUI_MALLOC(fontImageUncompSize);
+        imFont.data = (unsigned char*)RAYGUI_MALLOC(fontImageUncompSize);
         memcpy(imFont.data, fileDataPtr, fontImageUncompSize);
         fileDataPtr += fontImageUncompSize;
       }
@@ -5205,13 +5233,13 @@ static void GuiLoadStyleFromMemory(const unsigned char *fileData, int dataSize) 
 
         if ((recsDataCompressedSize > 0) && (recsDataCompressedSize != recsDataSize)) {
           // Recs data is compressed, uncompress it
-          unsigned char *recsDataCompressed = (unsigned char *)RAYGUI_MALLOC(recsDataCompressedSize);
+          unsigned char* recsDataCompressed = (unsigned char*)RAYGUI_MALLOC(recsDataCompressedSize);
 
           memcpy(recsDataCompressed, fileDataPtr, recsDataCompressedSize);
           fileDataPtr += recsDataCompressedSize;
 
           int recsDataUncompSize = 0;
-          font.recs = (Rectangle *)DecompressData(recsDataCompressed, recsDataCompressedSize, &recsDataUncompSize);
+          font.recs = (Rectangle*)DecompressData(recsDataCompressed, recsDataCompressedSize, &recsDataUncompSize);
 
           // Security check, data uncompressed size must match the expected original data size
           if (recsDataUncompSize != recsDataSize) RAYGUI_LOG("WARNING: Uncompressed font recs data could be corrupted");
@@ -5219,7 +5247,7 @@ static void GuiLoadStyleFromMemory(const unsigned char *fileData, int dataSize) 
           RAYGUI_FREE(recsDataCompressed);
         } else {
           // Recs data is uncompressed
-          font.recs = (Rectangle *)RAYGUI_CALLOC(font.glyphCount, sizeof(Rectangle));
+          font.recs = (Rectangle*)RAYGUI_CALLOC(font.glyphCount, sizeof(Rectangle));
           for (int i = 0; i < font.glyphCount; i++) {
             memcpy(&font.recs[i], fileDataPtr, sizeof(Rectangle));
             fileDataPtr += sizeof(Rectangle);
@@ -5238,24 +5266,24 @@ static void GuiLoadStyleFromMemory(const unsigned char *fileData, int dataSize) 
         }
 
         // Allocate required glyphs space to fill with data
-        font.glyphs = (GlyphInfo *)RAYGUI_CALLOC(font.glyphCount, sizeof(GlyphInfo));
+        font.glyphs = (GlyphInfo*)RAYGUI_CALLOC(font.glyphCount, sizeof(GlyphInfo));
 
         if ((glyphsDataCompressedSize > 0) && (glyphsDataCompressedSize != glyphsDataSize)) {
           // Glyphs data is compressed, uncompress it
-          unsigned char *glypsDataCompressed = (unsigned char *)RAYGUI_MALLOC(glyphsDataCompressedSize);
+          unsigned char* glypsDataCompressed = (unsigned char*)RAYGUI_MALLOC(glyphsDataCompressedSize);
 
           memcpy(glypsDataCompressed, fileDataPtr, glyphsDataCompressedSize);
           fileDataPtr += glyphsDataCompressedSize;
 
           int glyphsDataUncompSize = 0;
-          unsigned char *glyphsDataUncomp =
+          unsigned char* glyphsDataUncomp =
               DecompressData(glypsDataCompressed, glyphsDataCompressedSize, &glyphsDataUncompSize);
 
           // Security check, data uncompressed size must match the expected original data size
           if (glyphsDataUncompSize != glyphsDataSize)
             RAYGUI_LOG("WARNING: Uncompressed font glyphs data could be corrupted");
 
-          unsigned char *glyphsDataUncompPtr = glyphsDataUncomp;
+          unsigned char* glyphsDataUncompPtr = glyphsDataUncomp;
 
           for (int i = 0; i < font.glyphCount; i++) {
             memcpy(&font.glyphs[i].value, glyphsDataUncompPtr, sizeof(int));
@@ -5326,7 +5354,7 @@ static Rectangle GetTextBounds(int control, Rectangle bounds) {
 
 // Get text icon if provided and move text cursor
 // NOTE: We support up to 999 values for iconId
-static const char *GetTextIcon(const char *text, int *iconId) {
+static const char* GetTextIcon(const char* text, int* iconId) {
 #if !defined(RAYGUI_NO_ICONS)
   *iconId = -1;
   if (text[0] == '#')  // Maybe we have an icon!
@@ -5354,10 +5382,10 @@ static const char *GetTextIcon(const char *text, int *iconId) {
 
 // Get text divided into lines (by line-breaks '\n')
 // WARNING: It returns pointers to new lines but it does not add NULL ('\0') terminator!
-static const char **GetTextLines(const char *text, int *count) {
+static const char** GetTextLines(const char* text, int* count) {
 #define RAYGUI_MAX_TEXT_LINES 128
 
-  static const char *lines[RAYGUI_MAX_TEXT_LINES] = {0};
+  static const char* lines[RAYGUI_MAX_TEXT_LINES] = {0};
   for (int i = 0; i < RAYGUI_MAX_TEXT_LINES; i++) lines[i] = NULL;  // Init NULL pointers to substrings
 
   int textSize = (int)strlen(text);
@@ -5384,7 +5412,7 @@ static const char **GetTextLines(const char *text, int *count) {
 }
 
 // Get text width to next space for provided string
-static float GetNextSpaceWidth(const char *text, int *nextSpaceIndex) {
+static float GetNextSpaceWidth(const char* text, int* nextSpaceIndex) {
   float width = 0;
   int codepointByteCount = 0;
   int codepoint = 0;
@@ -5409,7 +5437,7 @@ static float GetNextSpaceWidth(const char *text, int *nextSpaceIndex) {
 }
 
 // Gui draw text using default font
-static void GuiDrawText(const char *text, Rectangle textBounds, int alignment, Color tint) {
+static void GuiDrawText(const char* text, Rectangle textBounds, int alignment, Color tint) {
 #define TEXT_VALIGN_PIXEL_OFFSET(h) ((int)h % 2)  // Vertical alignment for pixel perfect
 
 #if !defined(ICON_TEXT_PADDING)
@@ -5428,7 +5456,7 @@ static void GuiDrawText(const char *text, Rectangle textBounds, int alignment, C
   // WARNING: We can't use GuiTextSplit() function because it can be already used
   // before the GuiDrawText() call and its buffer is static, it would be overriden :(
   int lineCount = 0;
-  const char **lines = GetTextLines(text, &lineCount);
+  const char** lines = GetTextLines(text, &lineCount);
 
   // Text style variables
   // int alignment = GuiGetStyle(DEFAULT, TEXT_ALIGNMENT);
@@ -5694,7 +5722,7 @@ static void GuiTooltip(Rectangle controlRec) {
 
 // Split controls text into multiple strings
 // Also check for multiple columns (required by GuiToggleGroup())
-static const char **GuiTextSplit(const char *text, char delimiter, int *count, int *textRow) {
+static const char** GuiTextSplit(const char* text, char delimiter, int* count, int* textRow) {
   // NOTE: Current implementation returns a copy of the provided string with '\0' (string end delimiter)
   // inserted between strings defined by "delimiter" parameter. No memory is dynamically allocated,
   // all used memory is static... it has some limitations:
@@ -5712,7 +5740,7 @@ static const char **GuiTextSplit(const char *text, char delimiter, int *count, i
 #define RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE 1024
 #endif
 
-  static const char *result[RAYGUI_TEXTSPLIT_MAX_ITEMS] = {NULL};  // String pointers array (points to buffer data)
+  static const char* result[RAYGUI_TEXTSPLIT_MAX_ITEMS] = {NULL};  // String pointers array (points to buffer data)
   static char buffer[RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE] = {0};        // Buffer data (text input copy with '\0' added)
   memset(buffer, 0, RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE);
 
@@ -6096,7 +6124,7 @@ static bool CheckCollisionPointRec(Vector2 point, Rectangle rec) {
 }
 
 // Formatting of text with variables to 'embed'
-static const char *TextFormat(const char *text, ...) {
+static const char* TextFormat(const char* text, ...) {
 #if !defined(RAYGUI_TEXTFORMAT_MAX_SIZE)
 #define RAYGUI_TEXTFORMAT_MAX_SIZE 256
 #endif
@@ -6119,7 +6147,7 @@ static void DrawRectangleGradientV(int posX, int posY, int width, int height, Co
 }
 
 // Split string into multiple strings
-const char **TextSplit(const char *text, char delimiter, int *count) {
+const char** TextSplit(const char* text, char delimiter, int* count) {
   // NOTE: Current implementation returns a copy of the provided string with '\0' (string end delimiter)
   // inserted between strings defined by "delimiter" parameter. No memory is dynamically allocated,
   // all used memory is static... it has some limitations:
@@ -6133,7 +6161,7 @@ const char **TextSplit(const char *text, char delimiter, int *count) {
 #define RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE 1024
 #endif
 
-  static const char *result[RAYGUI_TEXTSPLIT_MAX_ITEMS] = {NULL};
+  static const char* result[RAYGUI_TEXTSPLIT_MAX_ITEMS] = {NULL};
   static char buffer[RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE] = {0};
   memset(buffer, 0, RAYGUI_TEXTSPLIT_MAX_TEXT_SIZE);
 
@@ -6164,7 +6192,7 @@ const char **TextSplit(const char *text, char delimiter, int *count) {
 
 // Get integer value from text
 // NOTE: This function replaces atoi() [stdlib.h]
-static int TextToInteger(const char *text) {
+static int TextToInteger(const char* text) {
   int value = 0;
   int sign = 1;
 
@@ -6181,7 +6209,7 @@ static int TextToInteger(const char *text) {
 // Get float value from text
 // NOTE: This function replaces atof() [stdlib.h]
 // WARNING: Only '.' character is understood as decimal point
-static float TextToFloat(const char *text) {
+static float TextToFloat(const char* text) {
   float value = 0.0f;
   float sign = 1.0f;
 
@@ -6207,7 +6235,7 @@ static float TextToFloat(const char *text) {
 }
 
 // Encode codepoint into UTF-8 text (char array size returned as parameter)
-static const char *CodepointToUTF8(int codepoint, int *byteSize) {
+static const char* CodepointToUTF8(int codepoint, int* byteSize) {
   static char utf8[6] = {0};
   int size = 0;
 
@@ -6241,8 +6269,8 @@ static const char *CodepointToUTF8(int codepoint, int *byteSize) {
 // Total number of bytes processed are returned as a parameter
 // NOTE: the standard says U+FFFD should be returned in case of errors
 // but that character is not supported by the default font in raylib
-static int GetCodepointNext(const char *text, int *codepointSize) {
-  const char *ptr = text;
+static int GetCodepointNext(const char* text, int* codepointSize) {
+  const char* ptr = text;
   int codepoint = 0x3f;  // Codepoint (defaults to '?')
   *codepointSize = 1;
 
