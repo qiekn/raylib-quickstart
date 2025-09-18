@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Config
-PROJECT_NAME="main"
+PROJECT_NAME="game"
 
 WEBBUILD="build"
 BUILD_DIR="build"
