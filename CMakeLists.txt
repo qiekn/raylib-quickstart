@@ -1,31 +1,19 @@
 cmake_minimum_required(VERSION 3.24...3.30)
 project(game)
 
-# generate compile_commands.json
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(FetchContent)
+# -----------------------------------------------------------------------------: dependencies
 
-#---------------------------------------------------------------------3
-#                            Dependencies                             |
-#---------------------------------------------------------------------3
-# 1. Raylib
-set(RAYLIB_VERSION 5.5)
-FetchContent_Declare(
-  raylib
-  DOWNLOAD_EXTRACT_TIMESTAMP OFF
-  URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
-  FIND_PACKAGE_ARGS
-)
-FetchContent_MakeAvailable(raylib)
+add_subdirectory(deps/raylib)
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-#---------------------------------------------------------------------3
-#                             Our Project                             |
-#---------------------------------------------------------------------3
+# -----------------------------------------------------------------------------: project
 
-file(GLOB_RECURSE SRCS CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp") # source files
-file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h") # header files
+file(GLOB_RECURSE SRCS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/*.h")
 
 add_compile_definitions(ASSETS="${CMAKE_SOURCE_DIR}/assets")
 
@@ -34,7 +22,7 @@ add_executable(${PROJECT_NAME} ${SRCS})
 
 # include directories
 target_include_directories(${PROJECT_NAME} PRIVATE
-  ${CMAKE_SOURCE_DIR}/include
+  ${PROJECT_SOURCE_DIR}/include
 )
 
 # include directories
@@ -42,8 +30,11 @@ target_link_libraries(${PROJECT_NAME}
     raylib
 )
 
+# -----------------------------------------------------------------------------: extra settings
+
+# Web
 if ("${PLATFORM}" STREQUAL "Web")
-  set_target_properties(${PROJECT_NAME} PROPERTIES 
+  set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)
 
   add_custom_command(
@@ -73,13 +64,9 @@ endif()
 
 # checks if OSX and links appropriate frameworks (only required on macOS)
 if (APPLE)
-    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
-    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
-    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+      "-framework IOKit"
+      "-framework Cocoa"
+      "-framework OpenGL"
+  )
 endif()
-
-# format
-add_custom_target(format 
-    COMMAND clang-format -i ${SRCS} ${HDRS}
-    COMMENT "Running clang-format on all header & cpp files"
-)

@@ -1,0 +1,4 @@
+[submodule "deps/raylib"]
+	path = deps/raylib
+	url = git@github.com:qiekn/raylib.git
+	branch = 5.5
