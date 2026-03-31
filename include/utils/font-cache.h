@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <list>
 #include <set>
+#include <unordered_map>
 #include "managers/font-manager.h"
 #include "utils/singleton.h"
 

@@ -1,6 +1,8 @@
 #include "managers/scene-manager.h"
 #include <raylib.h>
+#include <algorithm>
 #include <memory>
+#include <vector>
 #include "constants.h"
 #include "scenes/end-scene.h"
 #include "scenes/game-scene.h"
