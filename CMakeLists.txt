@@ -1,14 +1,20 @@
 cmake_minimum_required(VERSION 3.24...3.30)
 project(game)
 
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Debug Release MinSizeRel RelWithDebInfo)
+endif()
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # -----------------------------------------------------------------------------: dependencies
 
-add_subdirectory(deps/raylib)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build libraries as shared" FORCE)
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+add_subdirectory(deps/raylib)
 
 # -----------------------------------------------------------------------------: project
 
@@ -17,20 +23,28 @@ file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/include/*.h")
 
 add_compile_definitions(ASSETS="${CMAKE_SOURCE_DIR}/assets")
 
-# targets
 add_executable(${PROJECT_NAME} ${SRCS})
 
-# include directories
 target_include_directories(${PROJECT_NAME} PRIVATE
-  ${PROJECT_SOURCE_DIR}/include
+  include
+  deps/raygui
+  deps/json
 )
 
-# include directories
 target_link_libraries(${PROJECT_NAME}
     raylib
 )
 
 # -----------------------------------------------------------------------------: extra settings
+
+# Checks if OSX and links appropriate frameworks (only required on macOS)
+if (APPLE)
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+      "-framework IOKit"
+      "-framework Cocoa"
+      "-framework OpenGL"
+  )
+endif()
 
 # Web
 if ("${PLATFORM}" STREQUAL "Web")
@@ -62,11 +76,3 @@ if ("${PLATFORM}" STREQUAL "Web")
     --preload-file assets)
 endif()
 
-# checks if OSX and links appropriate frameworks (only required on macOS)
-if (APPLE)
-  target_link_libraries(${PROJECT_NAME} PRIVATE
-      "-framework IOKit"
-      "-framework Cocoa"
-      "-framework OpenGL"
-  )
-endif()
