@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24...3.30)
-project(game)
+project(game LANGUAGES C CXX)
 
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Debug Release MinSizeRel RelWithDebInfo)
 endif()
@@ -29,6 +29,19 @@ endforeach()
 
 add_subdirectory(deps/raylib)
 
+# imgui as a local static lib. Docking branch + GLFW/OpenGL3 backends.
+add_library(imgui STATIC
+  deps/imgui/imgui.cpp
+  deps/imgui/imgui_draw.cpp
+  deps/imgui/imgui_tables.cpp
+  deps/imgui/imgui_widgets.cpp
+  deps/imgui/imgui_demo.cpp
+  deps/imgui/backends/imgui_impl_glfw.cpp
+  deps/imgui/backends/imgui_impl_opengl3.cpp
+)
+target_include_directories(imgui PUBLIC deps/imgui deps/imgui/backends)
+target_include_directories(imgui PRIVATE deps/raylib/src/external/glfw/include)
+
 # -----------------------------------------------------------------------------: project
 
 file(GLOB_RECURSE SRCS CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/*.cpp")
@@ -42,10 +55,13 @@ target_include_directories(${PROJECT_NAME} PRIVATE
   include
   deps/raygui/src
   deps/json/single_include
+  deps/raylib/src/external/glfw/include
 )
 
 target_link_libraries(${PROJECT_NAME}
+  PRIVATE
     raylib
+    imgui
 )
 
 # -----------------------------------------------------------------------------: extra settings
@@ -53,9 +69,9 @@ target_link_libraries(${PROJECT_NAME}
 # Checks if OSX and links appropriate frameworks (only required on macOS)
 if (APPLE)
   target_link_libraries(${PROJECT_NAME} PRIVATE
-      "-framework IOKit"
-      "-framework Cocoa"
-      "-framework OpenGL"
+    "-framework IOKit"
+    "-framework Cocoa"
+    "-framework OpenGL"
   )
 endif()
 

@@ -2,3 +2,9 @@
 
 build/
 web/
+
+# ImGui per-user dock state (committed default lives in imgui_default.ini)
+imgui.ini
+
+# Window position / size persistence
+window.state
