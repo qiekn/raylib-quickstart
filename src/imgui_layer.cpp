@@ -254,7 +254,11 @@ void ImGuiLayer::LoadFonts(float dpi_scale) {
   ImGuiIO& io = ImGui::GetIO();
 
   const float font_size = kImGuiBaseFontSize * dpi_scale;
-  const std::filesystem::path regular_font = kFontPath / "noto-regular.ttf";
+  // The bare `noto-regular.ttf` shipped with this template is actually
+  // Noto *Serif*; ImGui chrome reads better in a Sans face, so we ship
+  // NotoSans-Regular.ttf alongside it and prefer that here. Falls back
+  // to ImGui's bundled ProggyClean if the file is missing.
+  const std::filesystem::path regular_font = kFontPath / "NotoSans-Regular.ttf";
 
   io.Fonts->Clear();
 
