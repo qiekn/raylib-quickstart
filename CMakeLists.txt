@@ -14,6 +14,19 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build libraries as shared" FORCE)
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+# Submodule sanity checks
+foreach(_dep IN ITEMS
+    "deps/raylib/CMakeLists.txt"
+    "deps/imgui/imgui.h"
+    "deps/json/single_include/nlohmann/json.hpp"
+    "deps/raygui/src/raygui.h")
+  if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${_dep}")
+    message(FATAL_ERROR
+      "Submodule missing: ${_dep}. Run: git submodule update --init --recursive")
+  endif()
+endforeach()
+
 add_subdirectory(deps/raylib)
 
 # -----------------------------------------------------------------------------: project
@@ -27,8 +40,8 @@ add_executable(${PROJECT_NAME} ${SRCS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
   include
-  deps/raygui
-  deps/json
+  deps/raygui/src
+  deps/json/single_include
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -75,4 +88,3 @@ if ("${PLATFORM}" STREQUAL "Web")
     --shell-file ${CMAKE_SOURCE_DIR}/src/shell.html
     --preload-file assets)
 endif()
-
